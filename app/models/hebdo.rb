@@ -1,0 +1,2 @@
+class Hebdo < ApplicationRecord
+end
