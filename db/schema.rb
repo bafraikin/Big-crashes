@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_082338) do
+ActiveRecord::Schema.define(version: 2018_08_15_123433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "crashes", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.uuid "identifier", default: -> { "gen_random_uuid()" }
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "hebdo_id"
+    t.index ["hebdo_id"], name: "index_crashes_on_hebdo_id"
+  end
 
   create_table "hebdos", force: :cascade do |t|
     t.string "name"
@@ -41,6 +52,12 @@ ActiveRecord::Schema.define(version: 2018_08_14_082338) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
