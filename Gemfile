@@ -21,6 +21,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'mail'
 gem 'json'
+gem 'annotate'
 gem 'omniauth'
 
 group :development, :test do
@@ -30,7 +31,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'database_cleaner'
-  gem "factory_bot_rails"
   gem 'simplecov'
   gem 'dotenv-rails'
 end
