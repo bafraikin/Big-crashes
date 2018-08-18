@@ -8,6 +8,8 @@
 
 url = File.open("URL", "r")
 
-url.each do | hebdo |
-  Hebdo.create(url: hebdo.split("!")[1].chomp, name: hebdo.split("!")[0])
+url.each_with_index do | hebdo, index |
+  unless index == 0
+    Hebdo.create(url: hebdo.split("!")[1].chomp, name: hebdo.split("!")[0])
+  end
 end
