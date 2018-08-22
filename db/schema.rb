@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_123433) do
+ActiveRecord::Schema.define(version: 2018_08_22_200753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_123433) do
     t.boolean "scraped", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_scrap", default: "1994-05-15 05:00:00"
   end
 
   create_table "users", force: :cascade do |t|
