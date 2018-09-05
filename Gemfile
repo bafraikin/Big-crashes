@@ -8,6 +8,7 @@ gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'webpacker'
+gem "aws-sdk-s3"
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'faker'
