@@ -1,5 +1,5 @@
 class Crash < ApplicationRecord 
-  belongs_to :hebdo
+  belongs_to :source, polymorphic: true, counter_cache: :nb_of_crash
 
   def self.sort
     bool = false

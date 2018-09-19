@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_104856) do
+ActiveRecord::Schema.define(version: 2018_09_19_123851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(version: 2018_09_19_104856) do
   create_table "crashes", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.uuid "identifier", default: -> { "gen_random_uuid()" }
+    t.string "identifier", default: -> { "gen_random_uuid()" }
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "hebdo_id"
+    t.bigint "source_id"
     t.boolean "correct", default: true
-    t.index ["hebdo_id"], name: "index_crashes_on_hebdo_id"
+    t.string "source_type"
+    t.index ["source_id"], name: "index_crashes_on_source_id"
   end
 
   create_table "hebdos", force: :cascade do |t|
@@ -57,12 +58,13 @@ ActiveRecord::Schema.define(version: 2018_09_19_104856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_scrap", default: "1994-05-15 05:00:00"
+    t.integer "nb_of_crash"
   end
 
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.integer "last_nb_nhits"
+    t.integer "nb_of_crash"
     t.boolean "scraped", default: false
     t.string "description"
     t.datetime "created_at", null: false

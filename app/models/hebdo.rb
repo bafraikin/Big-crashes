@@ -1,5 +1,5 @@
 class Hebdo < ApplicationRecord
-  has_many :crashes, dependent: :destroy
+  has_many :crashes, dependent: :destroy, as: :source
 
   def self.next
     good = Hebdo.find_by(scraped: false)
