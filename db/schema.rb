@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_134808) do
+ActiveRecord::Schema.define(version: 2018_09_19_143704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_134808) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_scrap", default: "1994-05-15 05:00:00"
   end
 
   create_table "hebdos", force: :cascade do |t|
