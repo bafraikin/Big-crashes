@@ -51,22 +51,23 @@ end
 
 def add_types
   $type.each do |typ|
-    Type.create(name: typ[0], url: typ[1], description: typ[2])
+    Dataset.create(name: typ[0], url: typ[1], description: typ[2])
+    puts "#{typ[0]} been created"
   rescue
     puts "#{typ[0]} been rescued" && next
   end
 end
 
 def fill_types
-res1 = Net::HTTP.get_response(try)
+  res1 = Net::HTTP.get_response(try)
 
-response = ""
-if res1.is_a?(NET::HTTPSuccess)
-  response = JSON.parse(res.body)
-  if response["nhits"] > 10
+  response = ""
+  if res1.is_a?(NET::HTTPSuccess)
+    response = JSON.parse(res.body)
+    if response["nhits"] > 10
 
+    end
   end
-end
 end
 
 add_types
