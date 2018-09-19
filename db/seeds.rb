@@ -10,7 +10,7 @@ require 'net/http'
 require 'pry'
 require 'json'
 
-url = File.open("URL", "r")
+$url = File.open("URL", "r")
 $type = [
   ["Collision contre obstacle", "Collision+contre+obstacle"],
   ["Collision entre train ou elements de trains", "Collision+entre+trains+ou+%C3%A9l%C3%A9ments+de+trains"],
@@ -42,7 +42,7 @@ base = "https://data.sncf.com/api/records/1.0/search//?dataset=incidents-securit
 
 
 def hebdomadaire
-  url.each_with_index do | hebdo, index |
+  $url.each_with_index do | hebdo, index |
     unless index == 0
       Hebdo.create(url: hebdo.split("!")[1].chomp, name: hebdo.split("!")[0])
     end
@@ -51,10 +51,12 @@ end
 
 def add_types
   $type.each do |typ|
+    begin
     Dataset.create(name: typ[0], url: typ[1], description: typ[2])
     puts "#{typ[0]} been created"
-  rescue
-    puts "#{typ[0]} been rescued" && next
+    rescue
+      puts "#{typ[0]} been rescued"
+    end
   end
 end
 
@@ -69,5 +71,3 @@ def fill_types
     end
   end
 end
-
-add_types
