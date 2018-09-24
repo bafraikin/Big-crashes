@@ -5,9 +5,9 @@ class Dataset < ApplicationRecord
 
   @@base = "https://data.sncf.com/api/records/1.0/search//?dataset=incidents-securite&sort=date&q=collision&refine.type="
 
-  def get_body_response(count=0)
+  def get_body_response(count= 0)
     uri = @@base + self.url
-    uri + "&start=#{count}" if count
+    uri + "&start=#{count.to_s}" if count
     url_to_request = URI(uri)
     response = Net::HTTP.get_response(url_to_request)
     if response.is_a?(Net::HTTPSuccess)
@@ -20,10 +20,12 @@ class Dataset < ApplicationRecord
     full_index = 0
     while full_index < nhits
       res_body['records'].each_with_index do |crash, index|
+
+        a = self.crashes.new(body: crash['fields']['commentaires'], identifier: crash['recordid'], localisation: crash['fields']['localisation'], date: Date.parse(crash['fields']['date']))
         begin
-        self.crashes.create(body: crash['commentaires'], identifier: crash['recordid'], localisation: crash['localisation'], date: Date.parse(crash['date']))
+          a.save
         rescue
-          puts "here was a problem #{crash['localisation']} , #{crash['date']}}"
+          puts "here was a problem #{crash['localisation']} , #{crash['date']}"
         end
         full_index += 1 
       end
@@ -37,11 +39,13 @@ class Dataset < ApplicationRecord
   def update
     body = get_body_response
     if body
-      if !self.nb_of_crash
+      if  self.nb_of_crash == 0 || self.nb_of_crash == nil
         wrap_it_all(body)
+        puts 'here'
       elsif self.nb_of_crash != body['nhits']
-
       end
+    else
+      puts "allo"
     end
   end
 end
