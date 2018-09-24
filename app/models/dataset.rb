@@ -36,7 +36,7 @@ class Dataset < ApplicationRecord
     end
   end
 
-  def update
+  def upload
     body = get_body_response
     if body
       if  self.nb_of_crash == 0 || self.nb_of_crash == nil
