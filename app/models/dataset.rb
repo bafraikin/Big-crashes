@@ -7,7 +7,7 @@ class Dataset < ApplicationRecord
 
   def get_body_response(count= 0)
     uri = @@base + self.url
-    uri + "&start=#{count.to_s}" if count
+    uri += "&start=#{count.to_s}" if count
     url_to_request = URI(uri)
     response = Net::HTTP.get_response(url_to_request)
     if response.is_a?(Net::HTTPSuccess)
