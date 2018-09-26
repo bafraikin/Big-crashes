@@ -1,4 +1,5 @@
 class Crash < ApplicationRecord 
+  validates :identifier, uniqueness: true
   belongs_to :source, polymorphic: true, counter_cache: :nb_of_crash
 
   def self.sort

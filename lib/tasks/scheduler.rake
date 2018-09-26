@@ -12,10 +12,10 @@ desc "This task is going to take each type and add the crashes found with the ap
 task :api_upload => :environment do
   any = Dataset.find_by(scraped: false)
   if any
-    any.upload
+    any.api_upload
   else
-    another = Dataset.all.order(:last_scrap).first
-    another.upload
+    another = Dataset.all.order(:).first
+    another.api_upload
   end
 end
 
