@@ -14,7 +14,7 @@ task :api_upload => :environment do
   if any
     any.api_upload
   else
-    another = Dataset.all.order(:).first
+    another = Dataset.all.order(:"updated_at").first
     another.api_upload
   end
 end
