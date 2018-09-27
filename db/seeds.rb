@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'net/http'
-require 'pry'
 require 'json'
 
 $url = File.open("URL", "r")
