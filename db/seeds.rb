@@ -60,14 +60,4 @@ def add_types
   end
 end
 
-def fill_types
-  res1 = Net::HTTP.get_response(try)
-
-  response = ""
-  if res1.is_a?(NET::HTTPSuccess)
-    response = JSON.parse(res.body)
-    if response["nhits"] > 10
-
-    end
-  end
-end
+add_types
