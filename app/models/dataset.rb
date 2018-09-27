@@ -58,6 +58,7 @@ class Dataset < ApplicationRecord
     if body
       if  self.nb_of_crash == 0 || self.nb_of_crash == nil
         wrap_it_all(body)
+        self.update scraped: true
       elsif self.nb_of_crash != body['nhits']
         select_them(body)
       end
