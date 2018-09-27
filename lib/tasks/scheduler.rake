@@ -12,8 +12,10 @@ desc "This task is going to take each type and add the crashes found with the ap
 task :api_upload => :environment do
   any = Dataset.find_by(scraped: false)
   if any
+    binding.pry
     any.api_upload
   else
+    binding.pry
     another = Dataset.all.order(:"updated_at").first
     another.api_upload
   end
