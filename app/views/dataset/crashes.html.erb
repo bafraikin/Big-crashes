@@ -1,3 +1,3 @@
-<% @crashes.each do |crash| %>
-  <p> <%=   crash.date %> </p>
+<% @crashs.each do |crash| %>
+  <p> un <%= crash[2] %> survenue le <%= crash[0].strftime("%m/%d/%Y") %> et à <%= crash[1] %>  </p>
   <% end %>

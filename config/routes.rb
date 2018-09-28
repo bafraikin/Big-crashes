@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
   root to: 'home#index'
-  devise_for :users
+  get "dataset/:name", to: "dataset#crashes", as: "data"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
