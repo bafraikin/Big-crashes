@@ -9,7 +9,7 @@
 require 'net/http'
 require 'json'
 
-$url = File.open("URL", "r")
+$url = File.open("public/json/URL", "r")
 $type = [
   ["Collision contre obstacle", "Collision+contre+obstacle"],
   ["Collision entre train ou elements de trains", "Collision+entre+trains+ou+%C3%A9l%C3%A9ments+de+trains"],
@@ -39,6 +39,17 @@ $type = [
 
 base = "https://data.sncf.com/api/records/1.0/search//?dataset=incidents-securite&sort=date&q=collision&refine.type="
 
+def get_lexique
+
+  doc =  File.open("public/json/lexique.json").read
+  doc = JSON.parse(doc)
+
+  doc.each do |mot|
+    tmp = mot["fields"]
+    Terme.create(name: tmp["abreviation"], description: tmp["definition"])
+  end
+
+end
 
 def hebdomadaire
   $url.each_with_index do | hebdo, index |
@@ -58,5 +69,5 @@ def add_types
     end
   end
 end
+get_lexique
 
-add_types

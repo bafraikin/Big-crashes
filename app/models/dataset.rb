@@ -63,7 +63,6 @@ class Dataset < ApplicationRecord
         select_them(body)
       end
       self.touch
-    else
     end
   end
 end

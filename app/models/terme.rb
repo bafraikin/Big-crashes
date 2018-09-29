@@ -1,0 +1,2 @@
+class Terme < ApplicationRecord
+end
