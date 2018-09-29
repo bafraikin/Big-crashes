@@ -19,3 +19,8 @@ task :api_upload => :environment do
   end
 end
 
+desc "This task add to crashes some terme"
+
+
+
+
