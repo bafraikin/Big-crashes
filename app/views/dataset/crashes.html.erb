@@ -21,14 +21,3 @@
   </div>
 <% end %>
 
-
-<table>
-  <tr>
-    <th> categorie </th><th> date </th> <th> localisation </th> <th>liens</th> </tr>
-  <% @crashs.each do |crash| %>
-    <tr>
-      <td> <%= crash[2] %> </td>  <td> <%= crash[0].strftime("%m/%d/%Y") %> </td> <td> <%= crash[1] %> </td> <td><%= link_to "show", crash_path(crash[3]) %> </td>
-    </tr>
-  <% end%>
-<% end %>
-</table>
