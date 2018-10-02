@@ -39,16 +39,22 @@ $type = [
 
 base = "https://data.sncf.com/api/records/1.0/search//?dataset=incidents-securite&sort=date&q=collision&refine.type="
 
-def get_lexique
+def get_new_lexique
 
   doc =  File.open("public/json/lexique.json").read
   doc = JSON.parse(doc)
 
   doc.each do |mot|
     tmp = mot["fields"]
-    Terme.create(name: tmp["abreviation"], description: tmp["definition"])
+    term = Terme.find_or_create_by(name: tmp["abreviation"])
+    unless term.description
+      term.description = tmp["definition"]
+    else
+      term.description += " // " + tmp["definition"]
+      p term
+    end
+    term.save
   end
-
 end
 
 def hebdomadaire
@@ -62,12 +68,12 @@ end
 def add_types
   $type.each do |typ|
     begin
-    Dataset.create(name: typ[0], url: typ[1], description: typ[2])
-    puts "#{typ[0]} been created"
+      Dataset.create(name: typ[0], url: typ[1], description: typ[2])
+      puts "#{typ[0]} been created"
     rescue
       puts "#{typ[0]} been rescued"
     end
   end
 end
-get_lexique
+get_new_lexique
 
