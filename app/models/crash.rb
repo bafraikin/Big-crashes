@@ -18,8 +18,8 @@ class Crash < ApplicationRecord
 
   def define
     Terme.all.each do |term|
-
-      if /[^[:alpha:]]#{term.name}[^[:alpha:]]/.match(self.body)
+      patern =/[^[:alpha:]]#{term.name}[^[:alpha:]]/
+      if patern.match(self.body)
         self.add_descript(term.name, term.description)
       end
     end
