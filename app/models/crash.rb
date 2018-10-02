@@ -13,12 +13,13 @@ class Crash < ApplicationRecord
   end
 
   def add_descript(name, descript)
-    self.body.gsub!(name, "<span title='#{descript}'><b>#{name}</b></span>")
+    p name
+    self.body.gsub!(/(?<=[^[:alpha:]])#{name}(?=[^[:alpha:]])/i, "<span title=\'#{descript}\'><b>#{$&}</b></span>")
   end
 
   def define
     Terme.all.each do |term|
-      patern =/[^[:alpha:]]#{term.name}[^[:alpha:]]/
+      patern =/(?<=[^[:alpha:]])#{term.name}(?=[^[:alpha:]])/
       if patern.match(self.body)
         self.add_descript(term.name, term.description)
       end

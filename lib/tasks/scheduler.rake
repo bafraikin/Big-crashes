@@ -23,12 +23,6 @@ desc "This task add to crashes some define"
 task :add_define => :environment do
   10.times do
   to_define = Crash.all.order(:updated_at).first
-  to_define.define
-  p to_define.body
-  to_define.save
   end 
 end
-
-
-
 
