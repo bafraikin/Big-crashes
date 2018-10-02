@@ -1,3 +1,7 @@
 <%= @crash.localisation %>
 <%= @crash.date.strftime("%d/%m/%Y") %>
-<%= simple_format(@crash.body) %>
+<%= simple_format(@crash.body, {}, sanitize: false)%>
+
+
+
+

@@ -11,4 +11,17 @@ class Crash < ApplicationRecord
       bool ? (inst.update correct: false) : (inst.update correct: true)
     end
   end
+
+  def add_descript(name, descript)
+    self.body.gsub!(name, "<span title='#{descript}'><b>#{name}</b></span>")
+  end
+
+  def define
+    Terme.all.each do |term|
+
+      if /[^[:alpha:]]#{term.name}[^[:alpha:]]/.match(self.body)
+        self.add_descript(term.name, term.description)
+      end
+    end
+  end
 end

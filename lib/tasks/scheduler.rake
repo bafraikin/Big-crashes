@@ -19,7 +19,14 @@ task :api_upload => :environment do
   end
 end
 
-desc "This task add to crashes some terme"
+desc "This task add to crashes some define"
+task :add_define => :environment do
+  3.times do
+  to_define = Crash.all.order(:updated_at).first
+  to_define.define
+  to_define.save
+  end 
+end
 
 
 

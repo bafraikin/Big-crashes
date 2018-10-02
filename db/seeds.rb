@@ -75,5 +75,5 @@ def add_types
     end
   end
 end
-get_new_lexique
 
+ add_types
