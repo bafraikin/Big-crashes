@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_142122) do
+ActiveRecord::Schema.define(version: 2018_10_04_143849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_142122) do
     t.float "latitude"
     t.float "longitude"
     t.text "body"
+    t.boolean "defined", default: false
     t.index ["source_id"], name: "index_crashes_on_source_id"
   end
 
