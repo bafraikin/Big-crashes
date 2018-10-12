@@ -65,4 +65,17 @@ class Dataset < ApplicationRecord
       self.touch
     end
   end
+
+  def self.sort_dataset(id)
+    dataset = Dataset.find(id)
+    category = dataset.name
+    crashs = dataset.crashes.map { | crash | [crash.date, crash.localisation, crash.identifier]}
+    hash_years = {}
+    crashs.each do |crash|
+      hash_years[crash[0].strftime("%Y")] = [] if hash_years[crash[0].strftime("%Y")] == nil
+      hash_years[crash[0].strftime("%Y")] << crash
+  end
+    [category, hash_years]
+  end
+
 end
