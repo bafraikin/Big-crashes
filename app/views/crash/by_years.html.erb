@@ -1,0 +1,30 @@
+<h1> Tout les crash par années </h1>
+
+<div class="tab">
+  <% @by_years.keys.each do | value |%>
+    <button class="tablinks" onclick="openCity(event, <%= value %> )"><%= value %></button>
+  <% end %>
+</div>
+
+<% @by_years.keys.each do | value |%>
+  <div id="<%=value%>" class="tabcontent">
+    <h3><%=value%> </h3>
+    <table>
+      <tr>
+        <th> date </th> <th> localisation </th> <th>liens</th> type </tr>
+      <tr>
+        <% @by_years[value].each do |crash| %>
+          <tr>
+            <td> <%= crash[0].strftime("%m/%d/%Y") %> </td> <td> <%= crash[1].capitalize %> </td> <td><%= link_to "show", crash_path(crash[2]) %> </td> <td> <%= crash[3] %> </td>
+          </tr>
+        <% end%>
+    </table>
+  </div>
+<% end %>
+
+
+
+<script>
+$("button.tablinks:first").attr("id", "defaultOpen");
+$("#defaultOpen").click();
+</script>

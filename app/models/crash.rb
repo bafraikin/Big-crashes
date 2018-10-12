@@ -2,12 +2,15 @@ class Crash < ApplicationRecord
   validates :identifier, uniqueness: true
   belongs_to :source, polymorphic: true, counter_cache: :nb_of_crash
 
-
   def self.sort_by_years
-    Crash.order(:date)
+    crashs = Crash.order(:date).map { | crash | [crash.date, crash.localisation, crash.identifier, crash.source.name]}
+    hash_years = {}
+    crashs.each do |crash|
+      hash_years[crash[0].strftime("%Y")] = [] if hash_years[crash[0].strftime("%Y")] == nil
+      hash_years[crash[0].strftime("%Y")] << crash
+    end
+    hash_years
   end
-
-
 
   def add_descript(name, descript)
     self.body.gsub!("EOF", "<span title=\'#{descript.gsub('\'', '\\\\\'')}\'><b>#{name.gsub('\'', '\\\\\'')}</b></span> EOF")
