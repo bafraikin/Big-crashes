@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  def by_year
-    @data = Dataset.all.sort
+  def index
   end
+
 end
